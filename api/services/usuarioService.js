@@ -43,6 +43,59 @@ class UsuarioService {
         })
         return usuario
     }
+
+    async deletar(id) {
+        await database.usuarios.destroy({
+            where: {
+                id
+            }
+        })
+    }
+
+    async atualizar(dto, id) {
+        const usuario = await database.usuarios.findOne({
+            where: {
+                id
+            }
+        })
+        if (!usuario) {
+            throw new Error('Usuário não encontrado')
+        }
+        const senhaHash = await hash(dto.senha, 10)
+        await database.usuarios.update(
+            {
+                nome: dto.nome,
+                email: dto.email
+            },
+            {
+                where: {
+                    id
+                }
+            }
+        )
+    }
+
+    async atualizarSenha(dto, id) {
+        const usuario = await database.usuarios.findOne({
+            where: {
+                id
+            }
+        })
+        if (!usuario) {
+            throw new Error('Usuário não encontrado')
+        }
+        const senhaHash = await hash(dto.senha, 10)
+        await database.usuarios.update(
+            {
+                senha: senhaHash
+            },
+            {
+                where: {
+                    id
+                }
+            }
+        )
+    }
 }
 
 module.exports = UsuarioService

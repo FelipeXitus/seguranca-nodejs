@@ -36,6 +36,54 @@ class UsuarioController {
         }
     }
 
+    static async deletarUsuarioPorId(req, res) {
+        const { id } = req.params
+        try {
+            const usuario = await usuarioService.buscarPorId(id)
+            if (usuario) {
+                await usuarioService.deletar(id)
+                return res.status(200).json({ message: 'Usuário deletado com sucesso' })
+            } else {
+                return res.status(404).json({ message: 'Usuário não encontrado' })
+            }
+        } catch (error) {
+            return res.status(500).json(error.message)
+        }
+    }
+
+    static async editarUsuario(req, res) {
+        const { id } = req.params
+        const { nome, email, senha } = req.body
+        try {
+            const usuario = await usuarioService.buscarPorId(id)
+            if (usuario) {
+                await usuarioService.atualizar({ nome, email, senha }, id)
+                const usuarioAtualizado = await usuarioService.buscarPorId(id)
+                return res.status(200).json(usuarioAtualizado)
+            } else {
+                return res.status(404).json({ message: 'Usuário não encontrado' })
+            }
+        } catch (error) {
+            return res.status(500).json(error.message)
+        }
+    }
+
+    static async trocaSenhaUsuario(req, res) {
+        const { id } = req.params
+        const { senha } = req.body
+        try {
+            const usuario = await usuarioService.buscarPorId(id)
+            if (usuario) {
+                await usuarioService.atualizarSenha({ senha }, id)
+                const usuarioAtualizado = await usuarioService.buscarPorId(id)
+                return res.status(200).json(usuarioAtualizado)
+            } else {
+                return res.status(404).json({ message: 'Usuário não encontrado' })
+            }
+        } catch (error) {
+            return res.status(500).json(error.message)
+        }
+    }    
 }
 
 module.exports = UsuarioController
