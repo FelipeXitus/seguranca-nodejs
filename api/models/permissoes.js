@@ -5,8 +5,8 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class permissoes extends Model {
     static associate(models) {
-      permissoes.belongsTo(models.usuarios, { foreignKey: 'idUsuario' })
-      permissoes.belongsTo(models.regras, { foreignKey: 'idRegra' })
+      permissoes.belongsTo(models.usuarios, { as: 'permissoesUsuario', foreignKey: 'idUsuario' })
+      permissoes.belongsTo(models.regras, { as: 'permissoesRegra', foreignKey: 'idRegra' })
     }
   }
   permissoes.init({

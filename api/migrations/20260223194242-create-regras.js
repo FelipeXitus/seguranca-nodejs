@@ -15,6 +15,13 @@ module.exports = {
       descricao: {
         type: Sequelize.STRING
       },
+      idFuncionalidade: {
+        type: Sequelize.UUID,
+        references: {
+          model: 'funcionalidades',
+          key: 'id'
+        }
+      },
       ler: {
         type: Sequelize.BOOLEAN,
         defaultValue: false
