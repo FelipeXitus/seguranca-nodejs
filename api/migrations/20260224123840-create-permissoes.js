@@ -23,6 +23,13 @@ module.exports = {
           key: 'id'
         }
       },
+      idArea: {
+        type: Sequelize.UUID,
+        references: {
+          model: 'areas',
+          key: 'id'
+        }
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

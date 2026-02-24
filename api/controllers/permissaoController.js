@@ -3,9 +3,9 @@ const permissaoService = new PermissaoService()
 
 class PermissaoController {
     static async cadastrarPermissao(req, res) {
-        const { idUsuario, idRegra } = req.body
+        const { idUsuario, idRegra, idArea } = req.body
         try {
-            const novaPermissao = await permissaoService.cadastrar({ idUsuario, idRegra })
+            const novaPermissao = await permissaoService.cadastrar({ idUsuario, idRegra, idArea })
             return res.status(201).json(novaPermissao)
         } catch (error) {
             return res.status(500).json(error.message)
@@ -53,9 +53,9 @@ class PermissaoController {
 
     static async editarPermissao(req, res) {
         const { id } = req.params
-        const { idUsuario, idRegra } = req.body
+        const { idUsuario, idRegra, idArea } = req.body
         try {
-            const permissaoAtualizada = await permissaoService.editarPorId(id, { idUsuario, idRegra })
+            const permissaoAtualizada = await permissaoService.editarPorId(id, { idUsuario, idRegra, idArea })
             return res.status(200).json(permissaoAtualizada)
         } catch (error) {
             return res.status(404).json({ error: error.message })

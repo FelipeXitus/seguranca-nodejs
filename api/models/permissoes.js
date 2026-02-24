@@ -7,11 +7,13 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       permissoes.belongsTo(models.usuarios, { as: 'permissoesUsuario', foreignKey: 'idUsuario' })
       permissoes.belongsTo(models.regras, { as: 'permissoesRegra', foreignKey: 'idRegra' })
+      permissoes.belongsTo(models.areas, { as: 'permissoesArea', foreignKey: 'idArea' })
     }
   }
   permissoes.init({
     idUsuario: DataTypes.UUID,
-    idRegra: DataTypes.UUID
+    idRegra: DataTypes.UUID,
+    idArea: DataTypes.UUID
   }, {
     sequelize,
     modelName: 'permissoes',

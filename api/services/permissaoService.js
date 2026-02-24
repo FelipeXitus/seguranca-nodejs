@@ -6,7 +6,8 @@ class PermissaoService {
         const permissaoExistente = await database.permissoes.findOne({
                 where: {
                     idUsuario: dto.idUsuario,
-                    idRegra: dto.idRegra
+                    idRegra: dto.idRegra,
+                    idArea: dto.idArea
                 }
             })
 
@@ -18,6 +19,7 @@ class PermissaoService {
                 id: uuid.v4(),
                 idUsuario: dto.idUsuario,
                 idRegra: dto.idRegra,
+                idArea: dto.idArea
             });
             return novaPermissao
         } catch (error) {
@@ -80,7 +82,10 @@ class PermissaoService {
             if (!permissao) {
                 throw new Error('Permissão não encontrada')
             }
-            await permissao.update(dto)
+            permissao.idUsuario = dto.idUsuario || permissao.idUsuario
+            permissao.idRegra = dto.idRegra || permissao.idRegra
+            permissao.idArea = dto.idArea || permissao.idArea
+            await permissao.save()
             return permissao
         } catch (error) {
             throw new Error('Erro ao editar permissão')

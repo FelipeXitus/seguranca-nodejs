@@ -3,9 +3,9 @@ const regraService = new RegraService()
 
 class RegraController {
     static async cadastrarRegra(req, res) {
-        const { nome, descricao, ler, escrever, deletar  } = req.body
+        const { nome, descricao, idFuncionalidade, ler, escrever, deletar  } = req.body
         try {
-            const novaRegra = await regraService.cadastrar({ nome, descricao, ler, escrever, deletar })
+            const novaRegra = await regraService.cadastrar({ nome, descricao, idFuncionalidade, ler, escrever, deletar })
             return res.status(201).json(novaRegra)
         } catch (error) {
             return res.status(500).json(error.message)
@@ -43,9 +43,9 @@ class RegraController {
 
     static async editarRegra(req, res) {
         const { id } = req.params
-        const { nome, descricao, ler, escrever, deletar } = req.body
+        const { nome, descricao, idFuncionalidade, ler, escrever, deletar } = req.body
         try {
-            const regraAtualizada = await regraService.editarPorId(id, { nome, descricao, ler, escrever, deletar })
+            const regraAtualizada = await regraService.editarPorId(id, { nome, descricao, idFuncionalidade, ler, escrever, deletar })
             return res.status(200).json(regraAtualizada)
         } catch (error) {
             return res.status(404).json({ error: error.message })

@@ -6,11 +6,16 @@ module.exports = (sequelize, DataTypes) => {
   class regras extends Model {
     static associate(models) {
       regras.hasMany(models.permissoes, { foreignKey: 'idRegra' })
+      regras.belongsToMany(models.areas, { foreignKey: 'idFuncionalidade', as: 'funcionalidade', through: 'areasRegras' })
     }
   }
   regras.init({
     nome: DataTypes.STRING,
     descricao: DataTypes.STRING,
+    idFuncionalidade: { 
+      type: DataTypes.UUID, 
+      allowNull: false 
+    },
     ler: {
       type: DataTypes.BOOLEAN,
       defaultValue: false

@@ -18,6 +18,7 @@ class RegraService {
             id: uuid.v4(),
             nome: dto.nome,
             descricao: dto.descricao,
+            idFuncionalidade: dto.idFuncionalidade,
             ler: dto.ler || false,
             escrever: dto.escrever || false,
             deletar: dto.deletar || false
@@ -69,6 +70,7 @@ class RegraService {
             }
             regra.nome = dto.nome || regra.nome
             regra.descricao = dto.descricao || regra.descricao
+            regra.idFuncionalidade = dto.idFuncionalidade || regra.idFuncionalidade
             regra.ler = dto.ler !== undefined ? dto.ler : regra.ler
             regra.escrever = dto.escrever !== undefined ? dto.escrever : regra.escrever
             regra.deletar = dto.deletar !== undefined ? dto.deletar : regra.deletar
