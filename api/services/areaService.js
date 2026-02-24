@@ -16,7 +16,8 @@ class areaService {
         try {
             const novaArea = await database.areas.create({
             id: uuid.v4(),
-            nome: dto.nome
+            nome: dto.nome,
+            path: dto.path
         });
         return novaArea
         } catch (error) {
@@ -64,6 +65,7 @@ class areaService {
                 throw new Error('Área não encontrada')
             }
             area.nome = dto.nome || area.nome
+            area.path = dto.path || area.path
             await area.save()
             return area
         } catch (error) {

@@ -3,9 +3,9 @@ const areaService = new AreaService()
 
 class AreaController {
     static async cadastrarArea(req, res) {
-        const { nome } = req.body
+        const { nome, path } = req.body
         try {
-            const novaArea = await areaService.cadastrar({ nome })
+            const novaArea = await areaService.cadastrar({ nome, path })
             return res.status(201).json(novaArea)
         } catch (error) {
             return res.status(500).json({ error: error.message })
@@ -43,9 +43,9 @@ class AreaController {
 
     static async editarArea(req, res) {
         const { id } = req.params
-        const { nome } = req.body
+        const { nome, path } = req.body
         try {
-            const areaAtualizada = await areaService.editarPorId(id, { nome })
+            const areaAtualizada = await areaService.editarPorId(id, { nome, path })
             return res.status(200).json(areaAtualizada)
         } catch (error) {
             return res.status(404).json({ error: error.message })

@@ -5,7 +5,10 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class areas extends Model {
     static associate(models) {
-      models.areas.hasMany(models.permissoes, { foreignKey: 'idArea' })
+      areas.hasMany(models.permissoes, { 
+        as: 'areasPermissoes',
+        foreignKey: 'idArea' 
+      });
     }
   }
   areas.init({

@@ -1,4 +1,4 @@
-const { verify, decode } = require('jsonwebtoken')
+const { verify, decode } = require("jsonwebtoken");
 
 module.exports = async (req, res, next) => {
     const token = req.headers.authorization

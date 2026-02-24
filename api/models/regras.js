@@ -5,8 +5,16 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class regras extends Model {
     static associate(models) {
-      regras.hasMany(models.permissoes, { foreignKey: 'idRegra' })
-      regras.belongsToMany(models.areas, { foreignKey: 'idFuncionalidade', as: 'funcionalidade', through: 'areasRegras' })
+      regras.hasMany(models.permissoes, { 
+        as: 'regrasPermissoes',
+        foreignKey: 'idRegra' 
+      });
+
+      regras.belongsToMany(models.areas, { 
+        foreignKey: 'idFuncionalidade', 
+        as: 'funcionalidade', 
+        through: 'areasRegras' 
+      });
     }
   }
   regras.init({
